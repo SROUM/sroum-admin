@@ -14,6 +14,6 @@
 
 <main>
   <Nav {menus}/>
-  <Router {routes}/>
+  <div class="container mt-32"><Router {routes}/></div>
 </main>
 

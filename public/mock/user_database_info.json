@@ -1,0 +1,27 @@
+{
+    "createdAt": "2023-11-23 23:40:00",
+    "attributes": [
+        {
+            "name": "id",
+            "type": "varchar(20)",
+            "isPrimaryKey": true
+        },
+        {
+            "name": "password",
+            "type":"varchar(20)"
+        },
+        {
+            "name": "name",
+            "type":"varchar(20)"
+        },
+        {
+            "name": "gender",
+            "type":"char(1)"
+        },
+        {
+            "name": "desc",
+            "type":"varchar(1000)"
+        }
+    ],
+    "size": 3
+}

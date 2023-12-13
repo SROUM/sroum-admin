@@ -3,7 +3,7 @@ import axios from "axios";
 export class Api {
     constructor(){}
 
-    get(url: string, data: any): Promise<any> {
+    get(url: string, data?: any): Promise<any> {
         return axios.get(url, {data}).then(response => response.data);
     }
 
@@ -15,7 +15,7 @@ export class Api {
         return axios.put(url, {data}).then(response => response.data);
     }
 
-    delete(url: string, data: any): Promise<any> {
+    delete(url: string, data?: any): Promise<any> {
         return axios.delete(url, {data}).then(response => response.data);
     }
 }
