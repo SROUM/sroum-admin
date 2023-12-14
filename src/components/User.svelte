@@ -19,6 +19,11 @@
     userMap.set(target.id, target.value);
   }
 
+  /**
+   * NOTE:
+   * 아래의 CRUD 동작들은 실제로는 서버에서 이루어져야 합니다.
+   * 현재는 Mock Json Data를 사용하고 있어, 실제로는 서버에서 이루어지는 CRUD 동작들을 store에 저장후 업데이트 하는 방식을 사용하고 있습니다.
+   */
   function createUser() {
     const newUser = mapToObject(userMap) as User;
 
@@ -131,14 +136,12 @@
           <button
             type="button"
             class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full"
-            on:click="{updateUser}"
-            >UPDATE</button
+            on:click="{updateUser}">UPDATE</button
           >
           <button
             type="button"
             class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full"
-            on:click="{deleteUser}"
-            >DELETE</button
+            on:click="{deleteUser}">DELETE</button
           >
         </section>
       {/await}
