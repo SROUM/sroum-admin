@@ -1,11 +1,55 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { Api } from '../utils/api';
+  import { users } from '../utils/stores';
+  import { mapToObject } from '../utils/common';
 
   const api = new Api();
 
   $: userDatabaseInfo = api.get('/mock/user_database_info.json');
-  $: users = api.get('/mock/users.json').then(res => res.users);
+
+  onMount(() => {
+    api.get('/mock/users.json').then(res => users.set(res.users));
+  });
+
+  const userMap = new Map<string, string>();
+
+  function setUserAttrData(event: Event) {
+    const target = event.target as HTMLInputElement;
+    userMap.set(target.id, target.value);
+  }
+
+  function createUser() {
+    const newUser = mapToObject(userMap) as User;
+
+    users.update(users => [...users, newUser]);
+  }
+
+  function updateUser() {
+    const userToUpdate = mapToObject(userMap) as User;
+
+    const userIndex = $users.findIndex(user => user.id === userToUpdate.id);
+    if (userIndex < 0) {
+      return;
+    }
+
+    users.update(users => [
+      ...users.slice(0, userIndex),
+      userToUpdate,
+      ...users.slice(userIndex + 1),
+    ]);
+  }
+
+  function deleteUser() {
+    const userIdToDelete = userMap.get('id');
+
+    const userIndex = $users.findIndex(user => user.id === userIdToDelete);
+    if (userIndex < 0) {
+      return;
+    }
+
+    users.update(users => [...users.slice(0, userIndex), ...users.slice(userIndex + 1)]);
+  }
 </script>
 
 <article>
@@ -42,11 +86,12 @@
               {#if attr.input === 'text'}
                 <input
                   type="text"
+                  id="{attr.name}"
                   class="bg-gray-100 border-none text-gray-600 placeholder:text-gray-400 text-sm rounded-md focus:ring-gray-200 focus:border-gray-200 block w-full p-2"
                   placeholder="{`${attr.name}: ${attr.type.toUpperCase()}${
                     attr.isPrimaryKey ? ' primary-key' : ''
                   }`}"
-                  required
+                  on:change="{setUserAttrData}"
                 />
               {:else if attr.input === 'select'}
                 <div
@@ -56,7 +101,9 @@
                     >{`${attr.name}: ${attr.type.toUpperCase()}`}</span
                   >
                   <select
+                    id="{attr.name}"
                     class="py-2.5 px-0 ml-2 w-1/2 text-sm text-gray-600 bg-transparent border-none appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                    on:change="{setUserAttrData}"
                   >
                     <option selected></option>
                     {#each attr.selectOptions as option}
@@ -66,10 +113,11 @@
                 </div>
               {:else if attr.input === 'textarea'}
                 <textarea
-                  id="message"
+                  id="{attr.name}"
                   rows="4"
                   class="bg-gray-100 border-none text-gray-600 placeholder:text-gray-400 text-sm rounded-md focus:ring-gray-200 focus:border-gray-200 block w-full p-2"
                   placeholder="{`${attr.name}: ${attr.type.toUpperCase()}`}"
+                  on:change="{setUserAttrData}"
                 ></textarea>
               {/if}
             </div>
@@ -78,16 +126,18 @@
           <button
             type="button"
             class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full"
-            >CREATE (INSERT)</button
+            on:click="{createUser}">CREATE (INSERT)</button
           >
           <button
             type="button"
             class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full"
+            on:click="{updateUser}"
             >UPDATE</button
           >
           <button
             type="button"
             class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full"
+            on:click="{deleteUser}"
             >DELETE</button
           >
         </section>
@@ -98,12 +148,12 @@
         Data.
       </h2>
 
-      {#await users then users}
+      {#if $users.length}
         <div class="relative overflow-x-auto">
           <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
-                {#each Object.keys(users[0]) as key}
+                {#each Object.keys($users[0]) as key}
                   <th scope="col" class="px-6 py-3">
                     {key}
                   </th>
@@ -111,7 +161,7 @@
               </tr>
             </thead>
             <tbody>
-              {#each users as user}
+              {#each $users as user}
                 <tr class="bg-white border-b">
                   {#each Object.values(user) as value}
                     <td class="px-6 py-4">{value}</td>
@@ -121,7 +171,7 @@
             </tbody>
           </table>
         </div>
-      {/await}
+      {/if}
     </section>
   </div>
 </article>
