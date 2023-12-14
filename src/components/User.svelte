@@ -7,10 +7,10 @@
   $: userDatabaseInfo = api.get('/mock/user_database_info.json');
 </script>
 
-<section>
+<article>
   <h1 class="mb-10 text-3xl font-bold leading-none tracking-tight text-gray-900">USER</h1>
   <div class="grid grid-cols-3 gap-5">
-    <div>
+    <section>
       <div>
         <h2 class="mb-4 text-xl font-semibold leading-none tracking-tight text-gray-900">
           Table Information.
@@ -31,7 +31,7 @@
           </ul>
         {/await}
       </div>
-    </div>
-    <div class="col-span-2">World</div>
+    </section>
+    <section class="col-span-2">World</section>
   </div>
-</section>
+</article>
