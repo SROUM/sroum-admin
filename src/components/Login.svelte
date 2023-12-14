@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -7,7 +7,7 @@
   let password: string;
 
   function logIn() {
-    dispatch('login', { email, password });
+    dispatch('login', { email, password, accessTime: new Date().toLocaleString() });
   }
 </script>
 
