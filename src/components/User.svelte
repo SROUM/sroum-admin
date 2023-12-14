@@ -5,6 +5,7 @@
   const api = new Api();
 
   $: userDatabaseInfo = api.get('/mock/user_database_info.json');
+  $: users = api.get('/mock/users.json').then(res => res.users);
 </script>
 
 <article>
@@ -92,6 +93,35 @@
         </section>
       {/await}
     </div>
-    <section class="col-span-2">World</section>
+    <section class="col-span-2">
+      <h2 class="mb-4 text-xl font-semibold leading-none tracking-tight text-gray-900">
+        Data.
+      </h2>
+
+      {#await users then users}
+        <div class="relative overflow-x-auto">
+          <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                {#each Object.keys(users[0]) as key}
+                  <th scope="col" class="px-6 py-3">
+                    {key}
+                  </th>
+                {/each}
+              </tr>
+            </thead>
+            <tbody>
+              {#each users as user}
+                <tr class="bg-white border-b">
+                  {#each Object.values(user) as value}
+                    <td class="px-6 py-4">{value}</td>
+                  {/each}
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
+      {/await}
+    </section>
   </div>
 </article>

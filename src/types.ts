@@ -16,3 +16,11 @@ interface UserDataCol {
   input: string;
   selectOtions?: string[];
 }
+
+interface User {
+  id: string;
+  pw: string;
+  name: string;
+  gender: string;
+  desc: string;
+}

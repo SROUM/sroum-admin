@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "user1",
+      "pw": "password1",
+      "name": "Anthony",
+      "gender": "M",
+      "desc": "A description about Anthony."
+    },
+    {
+      "id": "user2",
+      "pw": "password2",
+      "name": "Saige",
+      "gender": "F",
+      "desc": "A description about Saige."
+    },
+    {
+      "id": "user3",
+      "pw": "password3",
+      "name": "Jayde",
+      "gender": "F",
+      "desc": "A description about Jayde."
+    }
+  ]
+}
