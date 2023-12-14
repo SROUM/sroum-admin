@@ -39,31 +39,56 @@
           {#each userDatabaseInfo.attributes as attr}
             <div class="mb-3">
               {#if attr.input === 'text'}
-              <input
-                type="text"
-                class="bg-gray-100 border-none text-gray-600 placeholder:text-gray-400 text-sm rounded-md focus:ring-gray-200 focus:border-gray-200 block w-full p-2"
-                placeholder="{`${attr.name}: ${attr.type.toUpperCase()}${attr.isPrimaryKey ? ' primary-key': ''}`}"
-                required
-              />
+                <input
+                  type="text"
+                  class="bg-gray-100 border-none text-gray-600 placeholder:text-gray-400 text-sm rounded-md focus:ring-gray-200 focus:border-gray-200 block w-full p-2"
+                  placeholder="{`${attr.name}: ${attr.type.toUpperCase()}${
+                    attr.isPrimaryKey ? ' primary-key' : ''
+                  }`}"
+                  required
+                />
               {:else if attr.input === 'select'}
-              <div class="bg-gray-100 border-none text-sm rounded-md focus:ring-gray-200 focus:border-gray-200 block w-full p-2">
-                <span class="text-gray-400">{`${attr.name}: ${attr.type.toUpperCase()}`}</span>
-                <select class="py-2.5 px-0 ml-2 w-1/2 text-sm text-gray-600 bg-transparent border-none appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                  <option selected></option>
-                  {#each attr.selectOptions as option}
-                  <option value="{option}">{option}</option>
-                  {/each}
-              </select>
-              </div>
-              {:else if attr.input==='textarea'}
-              <textarea id="message" rows="4" class="bg-gray-100 border-none text-gray-600 placeholder:text-gray-400 text-sm rounded-md focus:ring-gray-200 focus:border-gray-200 block w-full p-2" placeholder="{`${attr.name}: ${attr.type.toUpperCase()}`}"></textarea>
+                <div
+                  class="bg-gray-100 border-none text-sm rounded-md focus:ring-gray-200 focus:border-gray-200 block w-full p-2"
+                >
+                  <span class="text-gray-400"
+                    >{`${attr.name}: ${attr.type.toUpperCase()}`}</span
+                  >
+                  <select
+                    class="py-2.5 px-0 ml-2 w-1/2 text-sm text-gray-600 bg-transparent border-none appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                  >
+                    <option selected></option>
+                    {#each attr.selectOptions as option}
+                      <option value="{option}">{option}</option>
+                    {/each}
+                  </select>
+                </div>
+              {:else if attr.input === 'textarea'}
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="bg-gray-100 border-none text-gray-600 placeholder:text-gray-400 text-sm rounded-md focus:ring-gray-200 focus:border-gray-200 block w-full p-2"
+                  placeholder="{`${attr.name}: ${attr.type.toUpperCase()}`}"
+                ></textarea>
               {/if}
             </div>
           {/each}
 
-          <button type="button" class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full">CREATE (INSERT)</button>
-          <button type="button" class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full">UPDATE</button>
-          <button type="button" class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full">DELETE</button>
+          <button
+            type="button"
+            class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full"
+            >CREATE (INSERT)</button
+          >
+          <button
+            type="button"
+            class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full"
+            >UPDATE</button
+          >
+          <button
+            type="button"
+            class="text-gray-500 bg-gray-300 border-none focus:outline-none hover:bg-amber-700 hover:text-gray-200 focus:ring-4 focus:ring-gray-200 font-semibold rounded-md text-sm px-5 py-2.5 me-2 mb-2 w-full"
+            >DELETE</button
+          >
         </section>
       {/await}
     </div>
