@@ -1,3 +1,7 @@
+interface IndexedObject {
+  [key: string]: any;
+}
+
 interface Menu {
   name: string;
   url: string;
@@ -19,7 +23,7 @@ interface UserDataCol {
 
 interface User {
   id: string;
-  pw: string;
+  password: string;
   name: string;
   gender: string;
   desc: string;
