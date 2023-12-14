@@ -13,4 +13,6 @@ interface UserDataCol {
   name: string;
   type: string;
   isPrimaryKey?: boolean;
+  input: string;
+  selectOtions?: string[];
 }

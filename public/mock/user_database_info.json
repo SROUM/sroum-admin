@@ -1,27 +1,33 @@
 {
-    "createdAt": "2023-11-23 23:40:00",
-    "attributes": [
-        {
-            "name": "id",
-            "type": "varchar(20)",
-            "isPrimaryKey": true
-        },
-        {
-            "name": "password",
-            "type":"varchar(20)"
-        },
-        {
-            "name": "name",
-            "type":"varchar(20)"
-        },
-        {
-            "name": "gender",
-            "type":"char(1)"
-        },
-        {
-            "name": "desc",
-            "type":"varchar(1000)"
-        }
-    ],
-    "size": 3
+  "createdAt": "2023-11-23 23:40:00",
+  "attributes": [
+    {
+      "name": "id",
+      "type": "varchar(20)",
+      "isPrimaryKey": true,
+      "input": "text"
+    },
+    {
+      "name": "password",
+      "type": "varchar(20)",
+      "input": "text"
+    },
+    {
+      "name": "name",
+      "type": "varchar(20)",
+      "input": "text"
+    },
+    {
+      "name": "gender",
+      "type": "char(1)",
+      "input": "select",
+      "selectOptions": ["M", "F"]
+    },
+    {
+      "name": "desc",
+      "type": "varchar(1000)",
+      "input": "textarea"
+    }
+  ],
+  "size": 3
 }
